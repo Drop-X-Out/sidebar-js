@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar with Hamburger Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #333;
+            padding-top: 60px;
+            transition: 0.3s;
+        }
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+        .hamburger {
+            font-size: 30px;
+            cursor: pointer;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            transition: 0.3s;
+        }
+        .hamburger:hover {
+            background-color: #444;
+        }
+        .content {
+            margin-left: 0;
+            padding: 20px;
+            transition: margin-left 0.3s;
+        }
+        @media screen and (max-height: 450px) {
+            .sidebar {padding-top: 15px;}
+            .sidebar a {font-size: 18px;}
+        }
+    </style>
+</head>
+<body>
+    <div id="mySidebar" class="sidebar">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <button class="hamburger" onclick="toggleSidebar()">☰</button>
+
+    <div class="content">
+        <h2>Responsive Sidebar with Hamburger Menu</h2>
+        <p>Click on the hamburger menu to open the sidebar. Click again to close it.</p>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById("mySidebar");
+            const content = document.querySelector(".content");
+            const hamburger = document.querySelector(".hamburger");
+            
+            if (sidebar.style.left === "0px") {
+                sidebar.style.left = "-250px";
+                content.style.marginLeft = "0";
+                hamburger.style.left = "10px";
+            } else {
+                sidebar.style.left = "0px";
+                content.style.marginLeft = "250px";
+                hamburger.style.left = "260px";
+            }
+        }
+
+        // Close the sidebar if the user clicks outside of it
+        document.addEventListener("click", function(event) {
+            const sidebar = document.getElementById("mySidebar");
+            const hamburger = document.querySelector(".hamburger");
+            if (event.target !== sidebar && event.target !== hamburger && sidebar.style.left === "0px") {
+                toggleSidebar();
+            }
+        });
+    </script>
+</body>
+</html>
